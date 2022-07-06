@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<extension key="be.ctrl.benormalised" type="module">
+  <file>benormalised</file>
+  <name>CiviCRM Normalisation</name>
+  <description>Everything functionally related to normalisation of contact data</description>
+  <license>AGPL-3.0</license>
+  <maintainer>
+    <author>Hechtermans Wouter</author>
+    <email>wouter@ctrl.be</email>
+  </maintainer>
+  <urls>
+    <url desc="Main Extension Page">https://github.com/kewljuice/be.ctrl.benormalised</url>
+    <url desc="Documentation">https://github.com/kewljuice/be.ctrl.benormalised</url>
+    <url desc="Support">http://www.ctrl.be/</url>
+    <url desc="Licensing">http://www.gnu.org/licenses/agpl-3.0.html</url>
+  </urls>
+  <releaseDate>2022-07-06</releaseDate>
+  <version>1.0</version>
+  <develStage>alpha</develStage>
+  <compatibility>
+    <ver>5.0</ver>
+  </compatibility>
+  <comments>This is a new, undeveloped module</comments>
+  <classloader>
+    <psr4 prefix="Civi\" path="Civi"/>
+  </classloader>
+  <civix>
+    <namespace>CRM/ctrl/Benormalised</namespace>
+  </civix>
+</extension>
