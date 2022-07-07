@@ -1,17 +1,17 @@
 <?php
 
-use Civi\Api4\Contact;
+use Civi\Api4\Phone;
 use CRM_ctrl_Benormalised_ExtensionUtil as E;
 
 /**
- * Benormalized.Contactfield API specification (optional)
+ * Benormalised.Phonefield API specification (optional)
  * This is used for documentation and validation.
  *
  * @param array $spec description of fields supported by this API call
  *
  * @see https://docs.civicrm.org/dev/en/latest/framework/api-architecture/
  */
-function _civicrm_api3_benormalised_Contactfield_spec(&$spec) {
+function _civicrm_api3_benormalised_Phonefield_spec(&$spec) {
   $spec['Field']['api.required'] = 1;
   $spec['Plugin']['api.required'] = 1;
   $spec['Function']['api.required'] = 1;
@@ -19,7 +19,7 @@ function _civicrm_api3_benormalised_Contactfield_spec(&$spec) {
 }
 
 /**
- * Benormalized.Contactfield API
+ * Benormalised.Phonefield API
  *
  * @param array $params
  *
@@ -30,14 +30,14 @@ function _civicrm_api3_benormalised_Contactfield_spec(&$spec) {
  * @see civicrm_api3_create_success
  *
  */
-function civicrm_api3_benormalised_Contactfield($params) {
+function civicrm_api3_benormalised_Phonefield($params) {
 
   if (array_key_exists('Field', $params)
     && array_key_exists('Plugin', $params)
     && array_key_exists('Function', $params)
     && array_key_exists('Limit', $params)) {
 
-    $fields = Contact::get()
+    $fields = Phone::get()
       ->addSelect($params['Field'])
       ->addWhere($params['Field'], 'IS NOT EMPTY')
       ->execute();
@@ -78,7 +78,7 @@ function civicrm_api3_benormalised_Contactfield($params) {
       'values' => count($normalise) . "/" . $fields->count(),
     ];
     // Spec: civicrm_api3_create_success($values = 1, $params = [], $entity = NULL, $action = NULL)
-    return civicrm_api3_create_success($returnValues, $params, 'Benormalised', 'Contactfield');
+    return civicrm_api3_create_success($returnValues, $params, 'Benormalised', 'Phonefield');
   }
   else {
     throw new API_Exception('Incorrect required parameters');
