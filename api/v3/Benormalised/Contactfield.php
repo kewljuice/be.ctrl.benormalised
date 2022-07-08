@@ -37,7 +37,7 @@ function civicrm_api3_benormalised_Contactfield($params) {
     && array_key_exists('Function', $params)
     && array_key_exists('Limit', $params)) {
 
-    $fields = Contact::get()
+    $fields = Contact::get(FALSE)
       ->addSelect($params['Field'])
       ->addWhere($params['Field'], 'IS NOT EMPTY')
       ->execute();
@@ -52,9 +52,9 @@ function civicrm_api3_benormalised_Contactfield($params) {
             $A = $field[$params['Field']];
             $B = $plugin->$function($A);
             if ($A != $B) {
-              $item["id"] = $field["id"];
-              $item["A"] = $A;
-              $item["B"] = $B;
+              $item['id'] = $field['id'];
+              $item['A'] = $A;
+              $item['B'] = $B;
               $normalise[] = $item;
               // @todo remove logging.
               Drupal::logger('benormalised')->notice(print_r($item, TRUE));
@@ -66,6 +66,25 @@ function civicrm_api3_benormalised_Contactfield($params) {
         }
         else {
           throw new API_Exception('Incorrect plugin');
+        }
+      }
+    }
+
+    if (is_numeric($params['Limit']) && $params['Limit'] != -1) {
+      $limit = $params['Limit'];
+      if ($limit == 0) {
+        $limit = count($normalise);
+      }
+      for ($i = 0; $i < $limit; $i++) {
+        if (isset($normalise[$i])) {
+          // update
+          Contact::update(FALSE)
+            ->addValue($params['Field'], $normalise[$i]['B'])
+            ->addWhere('id', '=', $normalise[$i]['id'])
+            ->execute();
+        }
+        else {
+          break;
         }
       }
     }
