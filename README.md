@@ -36,3 +36,15 @@ Enter the plugin Class name you want to use to Normalise. (see list above)
 ## Known Issues
 
 (* FIXME *)
+
+## Log
+
+```
+    //Create a CSV file
+    $file = fopen('/var/www/html/web/modules/civicrm/extensions/be.ctrl.benormalised/results.csv', 'w');
+    foreach ($normalise as $line) {
+      //put data into csv file
+      fputcsv($file, $line);
+    }
+    fclose($file);
+```

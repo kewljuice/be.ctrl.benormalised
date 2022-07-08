@@ -11,7 +11,7 @@ use CRM_ctrl_Benormalised_ExtensionUtil as E;
  *
  * @see https://docs.civicrm.org/dev/en/latest/framework/api-architecture/
  */
-function _civicrm_api3_benormalised_Adressfield_spec(&$spec) {
+function _civicrm_api3_benormalised_Addressfield_spec(&$spec) {
   $spec['Field']['api.required'] = 1;
   $spec['Plugin']['api.required'] = 1;
   $spec['Function']['api.required'] = 1;
@@ -30,7 +30,7 @@ function _civicrm_api3_benormalised_Adressfield_spec(&$spec) {
  *
  * @throws API_Exception
  */
-function civicrm_api3_benormalised_Adressfield($params) {
+function civicrm_api3_benormalised_Addressfield($params) {
 
   if (array_key_exists('Field', $params)
     && array_key_exists('Plugin', $params)
@@ -69,14 +69,6 @@ function civicrm_api3_benormalised_Adressfield($params) {
         }
       }
     }
-
-    //Create a CSV file
-    $file = fopen('/var/www/html/web/modules/civicrm/extensions/be.ctrl.benormalised/results.csv', 'w');
-    foreach ($normalise as $line) {
-      //put data into csv file
-      fputcsv($file, $line);
-    }
-    fclose($file);
 
     $returnValues = [
       'Field' => $params['Field'],
