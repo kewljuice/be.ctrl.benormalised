@@ -77,7 +77,6 @@ function civicrm_api3_benormalised_Contactfield($params) {
       }
       for ($i = 0; $i < $limit; $i++) {
         if (isset($normalise[$i])) {
-          // update
           Contact::update(FALSE)
             ->addValue($params['Field'], $normalise[$i]['B'])
             ->addWhere('id', '=', $normalise[$i]['id'])
