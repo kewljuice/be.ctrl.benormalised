@@ -77,7 +77,7 @@ function civicrm_api3_benormalised_Addressfield($params) {
       }
       for ($i = 0; $i < $limit; $i++) {
         if (isset($normalise[$i])) {
-          Phone::update(FALSE)
+          Address::update(FALSE)
             ->addValue($params['Field'], $normalise[$i]['B'])
             ->addWhere('id', '=', $normalise[$i]['id'])
             ->execute();
